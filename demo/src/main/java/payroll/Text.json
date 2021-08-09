@@ -2,7 +2,7 @@
   "id": 3,
   "firstName": "Samwise",
   "lastName": "Gamgee",
-  "role": "gardener",
+  "role": "ring bearer",
   "name": "Samwise Gamgee",
   "_links": {
     "self": {
