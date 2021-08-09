@@ -1,5 +1,7 @@
 package payroll;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -9,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "CUSTOMER_ORDER")
-class Order {
+public class Order {
 
     private @Id
     @GeneratedValue
@@ -73,3 +75,4 @@ class Order {
         return "Order{" + "id=" + this.id + ", description='" + this.description + '\'' + ", status=" + this.status + '}';
     }
 }
+
