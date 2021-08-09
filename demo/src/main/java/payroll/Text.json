@@ -1,15 +1,38 @@
 {
-  "id": 3,
-  "firstName": "Samwise",
-  "lastName": "Gamgee",
-  "role": "ring bearer",
-  "name": "Samwise Gamgee",
-  "_links": {
-    "self": {
-      "href": "http://localhost:8080/employees/3"
+  "orderList": [
+    {
+      "id": 3,
+      "description": "MacBook Pro",
+      "status": "COMPLETED",
+      "_links": {
+        "self": {
+          "href": "http://localhost:8080/orders/3"
+        },
+        "orders": {
+          "href": "http://localhost:8080/orders"
+        }
+      }
     },
-    "employees": {
-      "href": "http://localhost:8080/employees"
+    {
+      "id": 4,
+      "description": "iPhone",
+      "status": "IN_PROGRESS",
+      "_links": {
+        "self": {
+          "href": "http://localhost:8080/orders/4"
+        },
+        "orders": {
+          "href": "http://localhost:8080/orders"
+        },
+        "cancel": {
+          "href": "http://localhost:8080/orders/4/cancel"
+        },
+        "complete": {
+          "href": "http://localhost:8080/orders/4/complete"
+        }
+      }
     }
-  }
+  ]
+},"_links": {"self": {"href": "http://localhost:8080/orders"}
+}
 }
