@@ -48,6 +48,19 @@ class EmployeeController {
     }
     // end::get-aggregate-root[]
 
+    @GetMapping("/employees/last:{lastName}")
+    CollectionModel<EntityModel<Employee>> last(@PathVariable String lastName) {
+
+        List<Employee> employees = repo.findAll();
+
+        employees.removeIf(employee -> !employee.getLastName().equals(lastName));
+
+        List<EntityModel<Employee>> employeesModel = employees.stream().map(assembler::toModel).collect(Collectors.toList());
+
+        return CollectionModel.of(employeesModel, linkTo(methodOn(EmployeeController.class).all()).withSelfRel());
+
+
+    }
 
     @PostMapping("/employees")
     ResponseEntity<?> newEmployee(@RequestBody Employee newEmployee) {
@@ -70,11 +83,6 @@ class EmployeeController {
         return assembler.toModel(employee);
     }
 
-    @GetMapping("/employees/last/{lastName}")
-    Employee search(@PathVariable String lastName) {
-        return   repo.findByLastName(lastName);
-
-    }
 
     @PutMapping("/employees/{id}")
     ResponseEntity<?> replaceEmployee(@RequestBody Employee newEmployee, @PathVariable Long id) {
