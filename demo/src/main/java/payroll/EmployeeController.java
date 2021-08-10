@@ -45,9 +45,9 @@ class EmployeeController {
     @GetMapping("/employees/last:{lastName}")
     CollectionModel<EntityModel<Employee>> last(@PathVariable String lastName) {
 
-        List<Employee> employees = repo.findAll();
+        List<Employee> employees = repo.findAllByLastNameOrderByFirstNameAsc(lastName);
 
-        employees.removeIf(employee -> !employee.getLastName().equals(lastName));
+//        employees.removeIf(employee -> !employee.getLastName().equals(lastName));
 
         if (employees.size() == 0) {
             throw new EmployeeNotFoundException(lastName);

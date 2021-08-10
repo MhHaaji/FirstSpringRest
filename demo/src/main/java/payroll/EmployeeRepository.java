@@ -8,5 +8,6 @@ interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
 }
 interface EmpLastName extends JpaRepository<Employee, String>{
+    List<Employee> findAllByLastNameOrderByFirstNameAsc(String lastName);
     Employee findByLastName(String lastName);
 }
