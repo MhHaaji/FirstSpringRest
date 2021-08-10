@@ -7,13 +7,7 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -55,9 +49,13 @@ class EmployeeController {
 
         employees.removeIf(employee -> !employee.getLastName().equals(lastName));
 
-        List<EntityModel<Employee>> employeesModel = employees.stream().map(assembler::toModel).collect(Collectors.toList());
+        if (employees.size() == 0) {
+            throw new EmployeeNotFoundException(lastName);
+        } else {
+            List<EntityModel<Employee>> employeesModel = employees.stream().map(assembler::toModel).collect(Collectors.toList());
 
-        return CollectionModel.of(employeesModel, linkTo(methodOn(EmployeeController.class).all()).withSelfRel());
+            return CollectionModel.of(employeesModel, linkTo(methodOn(EmployeeController.class).all()).withSelfRel());
+        }
 
 
     }
