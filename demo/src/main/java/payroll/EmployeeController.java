@@ -23,12 +23,15 @@ class EmployeeController {
 
     private final EmployeeRepository repository;
 
+    private final EmpLastName repo;
+
     private final EmployeeModelAssembler assembler;
 
-    EmployeeController(EmployeeRepository repository, EmployeeModelAssembler assembler) {
+    EmployeeController(EmployeeRepository repository, EmployeeModelAssembler assembler, EmpLastName repo) {
 
         this.repository = repository;
         this.assembler = assembler;
+        this.repo = repo;
     }
 
 
@@ -65,6 +68,12 @@ class EmployeeController {
                 .orElseThrow(() -> new EmployeeNotFoundException(id));
 
         return assembler.toModel(employee);
+    }
+
+    @GetMapping("/employees/last/{lastName}")
+    Employee search(@PathVariable String lastName) {
+        return   repo.findByLastName(lastName);
+
     }
 
     @PutMapping("/employees/{id}")

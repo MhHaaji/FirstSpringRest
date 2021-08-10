@@ -44,6 +44,7 @@ public class OrderController {
         Order order = orderRepository.findById(id) //
                 .orElseThrow(() -> new OrderNotFoundException(id));
 
+
         return assembler.toModel(order);
     }
 
